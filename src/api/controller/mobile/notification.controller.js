@@ -110,19 +110,20 @@ module.exports = {
       if(!notiObjectId){
         return globalServices.global.returnResponse(
           res,
-          403,
-          true,
-          "notification Object Id is required",
+          400,   // Change the status code to 400
+          true,  // Error flag set to true
+          "Notification Object ID is required",
           {}
         );
+        
        }
 
      if(!notiExist){
       return globalServices.global.returnResponse(
         res,
-        403,
+        404,
         true,
-        "against this id no notification are avaliable",
+        "Against this id no notification are avaliable",
         {}
       );
      }

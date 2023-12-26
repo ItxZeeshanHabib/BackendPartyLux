@@ -1528,7 +1528,7 @@ const formattedDate = await globalServices.event.formatDateToISO(currentDate);
     if (!event) {
       return globalServices.global.returnResponse(
         res,
-        403,
+        404,
         true,
         "Event not found",
         {}
@@ -1540,16 +1540,15 @@ const formattedDate = await globalServices.event.formatDateToISO(currentDate);
       (participant) => participant.participantsId == userId
     );
 
-    console.log( " existingParticipant " + existingParticipant )
 
     if (!existingParticipant) {
       return globalServices.global.returnResponse(
         res,
-        403,
-        true,
+        404,   // Change the status code to 404
+        true,  // Error flag set to true
         "Participant does not exist",
         {}
-      )
+      );
     }
 
     const updatedEvent = await models.addEventparticipents.findOneAndUpdate(
@@ -1612,11 +1611,12 @@ const formattedDate = await globalServices.event.formatDateToISO(currentDate);
       } else {
         return globalServices.global.returnResponse(
           res,
-          403,
-          true,
+          404,   // Change the status code to 404
+          true,  // Error flag set to true
           "Participant does not exist in any event",
           {}
         );
+        
       }
     } catch (error) {
       console.error(error);
@@ -1637,11 +1637,12 @@ const formattedDate = await globalServices.event.formatDateToISO(currentDate);
       if (!event) {
         return globalServices.global.returnResponse(
           res,
-          403,
-          true,
+          404,   // Change the status code to 404
+          true,  // Error flag set to true
           "Event not found",
           {}
         );
+        
       }
     
       const participantIds = event.Participants.map((participant) => participant.participantsId);
@@ -1677,7 +1678,7 @@ const formattedDate = await globalServices.event.formatDateToISO(currentDate);
      if(!eventExist){
       return globalServices.global.returnResponse(
         res,
-        403,
+        404,
         true,
         "Event not found",
         {}
@@ -1797,7 +1798,7 @@ const formattedDate = await globalServices.event.formatDateToISO(currentDate);
 if (!participantsData || participantsData.length === 0) {
   return globalServices.global.returnResponse(
     res,
-    403,
+    404,
     true,
     "no participant found",
     {}

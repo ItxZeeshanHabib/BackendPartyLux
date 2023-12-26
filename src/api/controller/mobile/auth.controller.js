@@ -576,13 +576,14 @@ exports.socialLogin = async (req, res, next) => {
             data
           );
          }else{
-          return globalServices.global.returnResponse(
-            res,
-            403,
-            false,
-            `Your login type is not Valid`,
-           {}
-          );
+      return globalServices.global.returnResponse(
+  res,
+  400,   // Change the status code to 400
+  true, 
+  'Your login type is not valid',
+  {}
+);
+
          }
         } else {
 

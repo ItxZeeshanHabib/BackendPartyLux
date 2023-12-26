@@ -12,8 +12,10 @@ module.exports = {
     let payLoad = req.body;
     let userRole = user.role;
 
+    console.log(payLoad.cancelationPolicy,)
 
-    try {
+
+    // try {
 
       if (payLoad.startDateTime > payLoad.endDateTime) {
         return globalServices.global.returnResponse(
@@ -34,6 +36,8 @@ module.exports = {
           {}
         );
       }
+
+      // console.log(payLoad.businessWeek)
 
         Object.assign(payLoad, {
           userId: userId,
@@ -82,9 +86,9 @@ module.exports = {
 
 
 
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
   },
 
  getBusinessList: async (req, res) => {
@@ -464,13 +468,14 @@ const mapTrainings = distanceInMeters
       let userId = user._id.toString();
 
       if(!businessId){
-        return  globalServices.global.returnResponse(
+        return globalServices.global.returnResponse(
           res,
-          403,
-          true,
-          "bussiness Id is required",
+          400,  
+          true,  
+          "Business ID is required",
           {}
         );
+        
       }
 
       let business = await models.partner.findOne({
@@ -639,11 +644,12 @@ const mapTrainings = distanceInMeters
      if(!businessExist){
       return globalServices.global.returnResponse(
         res,
-        403,
-        true,
+        404,   // Change the status code to 404
+        true,  // Error flag set to true
         "Business not found",
         {}
       );
+      
      }
    
      if(businessExist.userId.toString() == userId.toString()){
@@ -761,11 +767,12 @@ const mapTrainings = distanceInMeters
       if(!userBussiness){
         return globalServices.global.returnResponse(
           res,
-          403,
-          true,
-          "bussiness not found",
+          404,   // Change the status code to 404
+          true,  // Error flag set to true
+          "Business not found",
           {}
         );
+        
       }
 
       return globalServices.global.returnResponse(

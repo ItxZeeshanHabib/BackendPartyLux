@@ -66,12 +66,12 @@ module.exports = {
         if (!expirationDate) {
           return globalServices.global.returnResponse(
             res,
-            403,
-            true,
-            'expiration Date is Required',
+            400, 
+            true,  
+            'Expiration Date is required',
             {}
           );
-        }
+          }          
 
         const participantId = userId.toString();
 
@@ -82,7 +82,7 @@ module.exports = {
         if (!event) {
           return globalServices.global.returnResponse(
             res,
-            403,
+            404,
             true,
             'event not found',
             {}
@@ -358,7 +358,7 @@ module.exports = {
           } else {
             return globalServices.global.returnResponse(
               res,
-              403,
+              200,
               false,
               'you have already subscribed this event!'
             );
@@ -402,9 +402,9 @@ module.exports = {
     if (!payLoad.userId || !payLoad.businessId || !payLoad.isApproved) {
       return globalServices.global.returnResponse(
         res,
-        403,
+        400,
         true,
-        'required fileds are missing',
+        'Required fileds are missing',
         {}
       );
     }

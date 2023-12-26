@@ -1,13 +1,30 @@
 const nodemailer = require("nodemailer");
 const { EmailService, senderEmail, senderPassword } = require("../../../config/vars");
 
-const transport = nodemailer.createTransport({
-  service: EmailService,
-  auth: {
-    user: senderEmail,
-    pass: senderPassword,
-  },
-});
+// const transport = nodemailer.createTransport({
+//   service: EmailService,
+//   auth: {
+//     user: senderEmail,
+//     pass: senderPassword,
+//   },
+// });
+
+var smtpConfig =  {
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        starttls: {
+            enable: true
+        },
+        secureConnection: true,
+        auth: {
+            user: senderEmail,
+            pass: senderPassword
+        },
+        from: senderEmail, 
+    }
+
+var transport = nodemailer.createTransport(smtpConfig);   
 
 exports.sendEmail = async (email = "", subject = "", msgHeading = '', content = null) => {
   try {
@@ -42,3 +59,4 @@ exports.sendEmail = async (email = "", subject = "", msgHeading = '', content = 
     console.error('Error:', e);
   }
 };
+

@@ -12,7 +12,6 @@ const Mail = require('../../model/email.model');
 const mailGun = require('nodemailer-mailgun-transport');
 const bcrypt = require('bcryptjs');
 // const email=require('../../utils/emails/emails')
-
 //GOOGLEOAuth
 
 // const { login } = require('./auth');

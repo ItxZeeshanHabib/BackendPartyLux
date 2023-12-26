@@ -185,13 +185,14 @@ module.exports = {
 
 
       if(membershipType == "free"){
-        return  globalServices.global.returnResponse(
+        return globalServices.global.returnResponse(
           res,
-          403,
-          true,
+          400,   // Change the status code to 400
+          true,  // Error flag set to true
           'Membership type could not be free',
           {}
-        )
+        );
+        
       }
 
       const session = await stripe.checkout.sessions.create({
@@ -379,7 +380,8 @@ connectRedirectCallback : async (req,res) => {
   const currency = 'usd';
 
   if (state !== 'qwertyuiopasdfghjklzxcvbnm') {
-    return res.status(403).send('Invalid state parameter');
+    return res.status(400).send('Invalid state parameter');
+
   }
 
   try {

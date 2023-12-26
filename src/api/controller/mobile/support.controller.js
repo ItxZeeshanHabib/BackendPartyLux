@@ -40,7 +40,7 @@ module.exports = {
         if(!name ||  !email || !phone || !company || !message){
             return globalServices.global.returnResponse(
                 res,
-                403,
+                400,
                 true,
                 'Required data is missing',
                 {}
@@ -64,7 +64,7 @@ module.exports = {
     }else{
         return globalServices.global.returnResponse(
             res,
-            403,
+            500,
             true,
             'Some thing went Wrong',
             {}
@@ -85,9 +85,9 @@ module.exports = {
       if(!emailRegex.test(email)){
         return globalServices.global.returnResponse(
             res,
-            403,
+            400,
             true,
-            'email not valid',
+            'Email not valid',
             {}
           );
       }
@@ -132,7 +132,7 @@ module.exports = {
     }else{
         return globalServices.global.returnResponse(
             res,
-            403,
+            500,
             true,
             'Some thing went Wrong',
             {}
